@@ -71,5 +71,5 @@ public class Userdata {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-
+ 
 }
