@@ -1,14 +1,14 @@
 package com.project.loanapp.mapper;
 
-import com.project.loanapp.domain.UserData;
-import com.project.loanapp.dto.UserDataDto;
+import com.project.loanapp.domain.Userdata;
+import com.project.loanapp.dto.UserdataDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserDataMapper {
+public class UserdataMapper {
 
-    public UserData mapToUserData(final UserDataDto userDataDto) {
-        return new UserData(
+    public Userdata mapToUserData(final UserdataDto userDataDto) {
+        return new Userdata(
                 userDataDto.getUserDataId(),
                 userDataDto.getFirstname(),
                 userDataDto.getSecondname(),
@@ -20,8 +20,8 @@ public class UserDataMapper {
         );
     }
 
-    public UserDataDto mapToUserDataDto(final UserData userData) {
-        return new UserDataDto(
+    public UserdataDto mapToUserDataDto(final Userdata userData) {
+        return new UserdataDto(
                 userData.getUserDataId(),
                 userData.getFirstname(),
                 userData.getSecondname(),

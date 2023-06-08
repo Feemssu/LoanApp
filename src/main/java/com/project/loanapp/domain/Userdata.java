@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "USERDATAS")
-public class UserData {
+@Entity(name = "USERDATA")
+public class Userdata {
 
     @Id
     @GeneratedValue
@@ -46,4 +46,16 @@ public class UserData {
     @NotNull
     @Column(name = "ADDRESS")
     private String address;
+
+    public Userdata(String firstname, String secondname, String lastname, int pesel, String phoneNumber, LocalDate dateOfBirth, String address) {
+        this.firstname = firstname;
+        this.secondname = secondname;
+        this.lastname = lastname;
+        this.pesel = pesel;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+    }
+
+
 }

@@ -44,6 +44,19 @@ public class User {
     @Column(name = "IS_AUTHORIZED")
     private boolean isAuthorized;
 
+    public void blockUser() {
+        isBlocked = true;
+    }
+
+    public void unblockUser() {
+        isBlocked = false;
+    }
+    public User(String login, String password, String email) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+    }
+
     public User(Long userId, String login, String password, String email) {
         this.userId = userId;
         this.login = login;

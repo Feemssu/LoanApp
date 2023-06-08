@@ -15,16 +15,6 @@ public class ApplicationController {
         return new ArrayList<>();
     }
 
-    @GetMapping(value = "allaccaplication")
-    public List<ApplicationDto> getAllAcceptedApplications() {
-        return new ArrayList<>();
-    }
-
-    @GetMapping(value = "allrejaplication")
-    public List<ApplicationDto> getAllRejectedApplications() {
-        return new ArrayList<>();
-    }
-
     @GetMapping(value = "{id}")
     public ApplicationDto getApplicationById(@PathVariable long id) {
         return new ApplicationDto();

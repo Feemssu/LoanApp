@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.math.BigDecimal;
 
 @SpringBootTest
-class LoanappApplicationTests {
+class LoanAppApplicationTests {
 
 
 	@Test
