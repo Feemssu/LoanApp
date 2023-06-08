@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "USERDATA")
 public class Userdata {
@@ -56,6 +55,21 @@ public class Userdata {
         this.dateOfBirth = dateOfBirth;
         this.address = address;
     }
+
+    public Userdata(Long userDataId, String firstname, String secondname, String lastname, int pesel, String phoneNumber, LocalDate dateOfBirth, String address) {
+        this.userDataId = userDataId;
+        this.firstname = firstname;
+        this.secondname = secondname;
+        this.lastname = lastname;
+        this.pesel = pesel;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
 
 }

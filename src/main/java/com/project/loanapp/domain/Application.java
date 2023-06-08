@@ -1,9 +1,6 @@
 package com.project.loanapp.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +10,6 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "APPLICATIONS")
 public class Application {
 
@@ -46,4 +42,17 @@ public class Application {
         this.interest = interest;
         this.installment = installment;
     }
+
+    public Application(Long applicationId, BigDecimal amountOfLoan, double interest, int installment, BigDecimal paymentPerMonth, BigDecimal totalLoanRepayment) {
+        this.applicationId = applicationId;
+        this.amountOfLoan = amountOfLoan;
+        this.interest = interest;
+        this.installment = installment;
+        this.paymentPerMonth = paymentPerMonth;
+        this.totalLoanRepayment = totalLoanRepayment;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
 }
