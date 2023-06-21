@@ -10,7 +10,8 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "USERDATA")
+@Entity
+@Table(name = "USERDATA")
 public class Userdata {
 
     @Id
@@ -67,9 +68,21 @@ public class Userdata {
         this.address = address;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private User user;
 
- 
+    @Override
+    public String toString() {
+        return "Userdata{" +
+                "userDataId=" + userDataId +
+                ", firstname='" + firstname + '\'' +
+                ", secondname='" + secondname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", pesel=" + pesel +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }

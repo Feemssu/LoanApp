@@ -3,14 +3,16 @@ package com.project.loanapp.service;
 import com.project.loanapp.domain.Application;
 import com.project.loanapp.exception.ApplicationNotFoundException;
 import com.project.loanapp.repository.ApplicationRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ApplicationService {
 
-    private ApplicationRepository applicationRepository;
+    private final ApplicationRepository applicationRepository;
 
     public List<Application> getAllApplications() {
         return applicationRepository.findAll();

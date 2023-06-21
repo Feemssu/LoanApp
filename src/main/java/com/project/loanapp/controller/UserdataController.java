@@ -1,12 +1,14 @@
 package com.project.loanapp.controller;
 
 import com.project.loanapp.dto.UserdataDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/v1/userdata")
 public class UserdataController {
 
@@ -30,7 +32,7 @@ public class UserdataController {
     }
 
     @PutMapping(value = "edit")
-    public UserdataDto updateUserdata() {
+    public UserdataDto updateUserdata(UserdataDto userdataDto) {
         return new UserdataDto();
     }
 
@@ -40,7 +42,7 @@ public class UserdataController {
     }
 
     @PostMapping(value = "createuserdata")
-    public void createUserdata() {
+    public void createUserdata(UserdataDto userdataDto) {
 
     }
 }

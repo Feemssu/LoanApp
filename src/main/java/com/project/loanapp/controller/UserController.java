@@ -3,12 +3,14 @@ package com.project.loanapp.controller;
 import com.project.loanapp.domain.User;
 import com.project.loanapp.dto.UserDto;
 import com.project.loanapp.exception.UserNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/v1/user")
 public class UserController {
 

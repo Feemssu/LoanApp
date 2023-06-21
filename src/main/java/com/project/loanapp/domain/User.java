@@ -9,13 +9,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @NoArgsConstructor
 @Data
-@Entity(name = "USERS")
+@Entity
+@Table(name = "USERS")
 public class User {
 
     @Id
@@ -43,12 +45,14 @@ public class User {
     @Column(name = "IS_AUTHORIZED")
     private boolean isAuthorized;
 
+    @Column(name = "ACCOUNT_BALANCE")
+    private BigDecimal accountBalance;
     public void blockUser() {
-        isBlocked = true;
+        this.isBlocked = true;
     }
 
     public void unblockUser() {
-        isBlocked = false;
+        this.isBlocked = false;
     }
     public User(String login, String password, String email) {
         this.login = login;
@@ -78,16 +82,29 @@ public class User {
 
     public void setUserdata(Userdata userdata) {
         this.userdata = userdata;
-        isAuthorized = true;
+        this.isAuthorized = true;
     }
 
     @OneToMany(
             targetEntity = Application.class,
-            cascade =CascadeType.ALL,
+            cascade = CascadeType.ALL,
             mappedBy = "user",
             fetch = FetchType.LAZY
 
     )
     private List<Application> application = new ArrayList<>();
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", isBlocked=" + isBlocked +
+                ", isAuthorized=" + isAuthorized +
+                ", userdata=" + userdata +
+                ", accountBalance=" + accountBalance +
+              //  ", application=" + application +
+                '}';
+    }
 }

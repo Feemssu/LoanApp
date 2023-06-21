@@ -3,14 +3,16 @@ package com.project.loanapp.service;
 import com.project.loanapp.domain.Userdata;
 import com.project.loanapp.exception.UserdataNotFoundException;
 import com.project.loanapp.repository.UserdataRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserdataService {
 
-    private UserdataRepository userdataRepository;
+    private final UserdataRepository userdataRepository;
 
     public List<Userdata> getAllUserdata() {
         return userdataRepository.findAll();
