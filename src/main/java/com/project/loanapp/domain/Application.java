@@ -1,10 +1,12 @@
 package com.project.loanapp.domain;
 
 import com.project.loanapp.service.Calculation;
+import com.project.loanapp.service.Credit;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.catalina.core.ApplicationPushBuilder;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -43,18 +45,6 @@ public class Application {
     @Column(name = "TOTAL_LOAN_REPAYMENT")
     private BigDecimal totalLoanRepayment;
 
-
-    public void setCreditCost(Calculation calculation) {
-        creditCost = calculation.creditCostCalculate(this);
-    }
-
-    public void setPaymentPerMonth(Calculation calculation) {
-        paymentPerMonth = calculation.paymentPerMonthCalculate(this);
-    }
-
-    public void setTotalLoanRepayment(Calculation calculation) {
-        totalLoanRepayment = calculation.totalCreditCostCalculate(this);
-    }
 
     public Application(BigDecimal amountOfLoan, int numberOfInstallment) {
         this.amountOfLoan = amountOfLoan;
@@ -99,6 +89,8 @@ public class Application {
         private BigDecimal paymentPerMonth;
         private BigDecimal totalLoanRepayment;
         private List<Installment> installments;
+        private Credit credit;
+        private final Calculation calculation;
 
         public ApplicationBuilder amountOfLoan(BigDecimal amountOfLoan) {
             this.amountOfLoan = amountOfLoan;
@@ -130,9 +122,47 @@ public class Application {
             return this;
         }
 
-        public Application build() {
+
+
+        public ApplicationBuilder(Calculation calculation, Credit credit){
+            this.calculation = calculation;
+            this.credit = credit;
+        }
+
+        public ApplicationBuilder generator(){
+            installments = credit.generateSchedule(buildApplication());
+            return this;
+        }
+
+        public ApplicationBuilder calculateCreditCost(){
+            creditCost = calculation.creditCostCalculate(buildApplication());
+            return this;
+        }
+
+        public ApplicationBuilder calculateTotalCreditCost() {
+            totalLoanRepayment = calculation.totalCreditCostCalculate(buildApplication());
+            return this;
+        }
+
+        public ApplicationBuilder calculatePaymentPerMonth() {
+            paymentPerMonth = calculation.paymentPerMonthCalculate(buildApplication());
+            return this;
+        }
+
+        private Application buildApplication() {
             return new Application(amountOfLoan, numberOfInstallment, creditCost,
                     paymentPerMonth, totalLoanRepayment, installments);
+        }
+
+
+        public Application build() {
+            Application application = buildApplication();
+
+            if(credit != null) {
+                List<Installment> generatedInstallments = credit.generateSchedule(application);
+                application.setInstallments(generatedInstallments);
+            }
+            return application;
         }
     }
 
@@ -147,6 +177,7 @@ public class Application {
                 ", paymentPerMonth=" + paymentPerMonth +
                 ", totalLoanRepayment=" + totalLoanRepayment +
                 ", user=" + user +
+                ", installments=" + installments +
                 '}';
     }
 }
