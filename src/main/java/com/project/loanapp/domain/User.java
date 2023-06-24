@@ -3,9 +3,7 @@ package com.project.loanapp.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
@@ -47,13 +45,7 @@ public class User {
 
     @Column(name = "ACCOUNT_BALANCE")
     private BigDecimal accountBalance;
-    public void blockUser() {
-        this.isBlocked = true;
-    }
 
-    public void unblockUser() {
-        this.isBlocked = false;
-    }
     public User(String login, String password, String email) {
         this.login = login;
         this.password = password;

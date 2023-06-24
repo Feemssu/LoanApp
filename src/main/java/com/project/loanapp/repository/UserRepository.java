@@ -22,4 +22,13 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Override
     void deleteById(Long userId);
 
+    List<User> findByIsBlockedTrue();
+
+    List<User> findByIsBlockedFalse();
+
+    Optional<User> findByLogin(String login);
+
+    Optional<User> findByEmail(String email);
+
+    void deleteByLogin(String login);
 }
