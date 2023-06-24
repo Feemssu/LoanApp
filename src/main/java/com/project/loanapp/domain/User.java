@@ -43,6 +43,10 @@ public class User {
     @Column(name = "IS_AUTHORIZED")
     private boolean isAuthorized;
 
+    @Column(name = "IS_LOGGED_IN")
+    private boolean isLoggedIn;
+
+
     @Column(name = "ACCOUNT_BALANCE")
     private BigDecimal accountBalance;
 

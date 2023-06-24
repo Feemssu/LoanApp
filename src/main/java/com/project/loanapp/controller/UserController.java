@@ -99,14 +99,5 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value = "/createuser")
-    public ResponseEntity<Void> createUser(@RequestBody UserDto userDto) {
-        if (userService.isLoginUnique(userDto.getLogin()) || userService.isEmailUnique(userDto.getEmail())) {
-            User user = userMapper.mapToUser(userDto);
-            userService.saveUser(user);
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
-    }
+
 }
