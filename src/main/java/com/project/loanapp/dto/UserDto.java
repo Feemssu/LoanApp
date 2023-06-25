@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @Getter
 @NoArgsConstructor
@@ -15,4 +17,6 @@ public class UserDto {
     private String email;
     private boolean isBlocked;
     private boolean isAuthorized;
+    private boolean isLoggedIn;
+    private BigDecimal accountBalance;
 }

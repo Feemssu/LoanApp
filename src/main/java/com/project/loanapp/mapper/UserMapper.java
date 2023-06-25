@@ -17,7 +17,9 @@ public class UserMapper {
                 userDto.getPassword(),
                 userDto.getEmail(),
                 userDto.isBlocked(),
-                userDto.isAuthorized()
+                userDto.isAuthorized(),
+                userDto.isLoggedIn(),
+                userDto.getAccountBalance()
         );
     }
 
@@ -28,7 +30,9 @@ public class UserMapper {
                 user.getPassword(),
                 user.getEmail(),
                 user.isBlocked(),
-                user.isAuthorized()
+                user.isAuthorized(),
+                user.isLoggedIn(),
+                user.getAccountBalance()
         );
     }
 

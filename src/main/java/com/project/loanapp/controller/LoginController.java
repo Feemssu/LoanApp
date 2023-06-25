@@ -35,7 +35,8 @@ public class LoginController {
         User user = userService.getUserByLogin(loginDto.getLogin());
         if(user.getPassword().equals(loginDto.getPassword())) {
             user.setLoggedIn(true);
-            return ResponseEntity.ok().build();
+            userService.saveUser(user);
+            return ResponseEntity.ok("Użytkownik zalogowany");
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Błędne dane");
         }
@@ -45,6 +46,7 @@ public class LoginController {
     public ResponseEntity<String> logoutUser(@RequestParam Long userId) throws UserNotFoundException {
         User user = userService.getUserById(userId);
         user.setLoggedIn(false);
+        userService.saveUser(user);
         return ResponseEntity.ok("Użytkownik został wylogowany");
     }
 }

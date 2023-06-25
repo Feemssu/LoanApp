@@ -63,13 +63,15 @@ public class User {
         this.email = email;
     }
 
-    public User(Long userId, String login, String password, String email, boolean isBlocked, boolean isAuthorized) {
+    public User(Long userId, String login, String password, String email, boolean isBlocked, boolean isAuthorized, boolean isLoggedIn, BigDecimal accountBalance) {
         this.userId = userId;
         this.login = login;
         this.password = password;
         this.email = email;
         this.isBlocked = isBlocked;
         this.isAuthorized = isAuthorized;
+        this.isLoggedIn = isLoggedIn;
+        this.accountBalance = accountBalance;
     }
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -98,6 +100,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", isBlocked=" + isBlocked +
                 ", isAuthorized=" + isAuthorized +
+                ", isLoggedIn=" + isLoggedIn +
                 ", userdata=" + userdata +
                 ", accountBalance=" + accountBalance +
               //  ", application=" + application +
