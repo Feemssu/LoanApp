@@ -1,5 +1,6 @@
 package com.project.loanapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -74,6 +75,7 @@ public class User {
         this.accountBalance = accountBalance;
     }
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Userdata userdata;
 

@@ -1,5 +1,6 @@
 package com.project.loanapp.dto;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -32,11 +32,11 @@ public class Userdata {
     private String lastname;
 
     @NotNull
-    @Column(name = "PESEL")
-    private int pesel;
+    @Column(name = "PESEL", unique = true)
+    private String pesel;
 
     @NotNull
-    @Column(name = "PHONE_NUMBER")
+    @Column(name = "PHONE_NUMBER", unique = true)
     private String phoneNumber;
 
     @NotNull
@@ -47,7 +47,7 @@ public class Userdata {
     @Column(name = "ADDRESS")
     private String address;
 
-    public Userdata(String firstname, String secondname, String lastname, int pesel, String phoneNumber, LocalDate dateOfBirth, String address) {
+    public Userdata(String firstname, String secondname, String lastname, String pesel, String phoneNumber, LocalDate dateOfBirth, String address, User user) {
         this.firstname = firstname;
         this.secondname = secondname;
         this.lastname = lastname;
@@ -55,9 +55,10 @@ public class Userdata {
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
+        this.user = user;
     }
 
-    public Userdata(Long userDataId, String firstname, String secondname, String lastname, int pesel, String phoneNumber, LocalDate dateOfBirth, String address) {
+    public Userdata(Long userDataId, String firstname, String secondname, String lastname, String pesel, String phoneNumber, LocalDate dateOfBirth, String address, User user) {
         this.userDataId = userDataId;
         this.firstname = firstname;
         this.secondname = secondname;
@@ -66,6 +67,7 @@ public class Userdata {
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
+        this.user = user;
     }
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

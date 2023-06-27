@@ -2,14 +2,17 @@ package com.project.loanapp.mapper;
 
 import com.project.loanapp.domain.Userdata;
 import com.project.loanapp.dto.UserdataDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class UserdataMapper {
 
+    private final UserMapper userMapper;
     public Userdata mapToUserdata(final UserdataDto userDataDto) {
         return new Userdata(
                 userDataDto.getUserDataId(),
@@ -19,7 +22,8 @@ public class UserdataMapper {
                 userDataDto.getPesel(),
                 userDataDto.getPhoneNumber(),
                 userDataDto.getDateOfBirth(),
-                userDataDto.getAddress()
+                userDataDto.getAddress(),
+                userDataDto.getUser()
         );
     }
 
@@ -32,7 +36,8 @@ public class UserdataMapper {
                 userData.getPesel(),
                 userData.getPhoneNumber(),
                 userData.getDateOfBirth(),
-                userData.getAddress()
+                userData.getAddress(),
+                userData.getUser()
         );
     }
 

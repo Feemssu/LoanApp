@@ -22,4 +22,12 @@ public interface UserdataRepository extends CrudRepository<Userdata, Long> {
     @Override
     void deleteById(Long userDataId);
 
+    List<Userdata> findAllByFirstname(String firstname);
+
+    List<Userdata> findAllByLastname(String lastname);
+
+    Optional<Userdata> findByPesel(String pesel);
+
+    Optional<Userdata> findByPhoneNumber(String phoneNumber);
+
 }
