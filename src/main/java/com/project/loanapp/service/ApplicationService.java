@@ -33,8 +33,4 @@ public class ApplicationService {
         return applicationRepository.save(application);
 
     }
-
-    public void deleteApplication(final Long applicationId) {
-        applicationRepository.deleteById(applicationId);
-    }
 }
