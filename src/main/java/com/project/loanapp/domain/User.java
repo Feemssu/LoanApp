@@ -49,7 +49,7 @@ public class User {
 
 
     @Column(name = "ACCOUNT_BALANCE")
-    private BigDecimal accountBalance;
+    private BigDecimal accountBalance = new BigDecimal(0);
 
     public User(String login, String password, String email) {
         this.login = login;
