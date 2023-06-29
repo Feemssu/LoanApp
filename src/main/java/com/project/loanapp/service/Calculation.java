@@ -10,19 +10,20 @@ import java.math.RoundingMode;
 @Service
 public class Calculation {
 
-    public BigDecimal creditCostCalculate(Application application) {
-       return application.getAmountOfLoan()
-               .multiply(BigDecimal.valueOf(application.getInterest()))
-               .multiply(BigDecimal.valueOf(application.getNumberOfInstallment()))
-               .divide(new BigDecimal(12),2,RoundingMode.HALF_UP);
+    public BigDecimal creditCostCalculate(BigDecimal amountOfLoan, int numberOfInstallment) {
+        double interest = 0.12;
+       return amountOfLoan
+               .multiply(BigDecimal.valueOf(interest))
+               .multiply(BigDecimal.valueOf(numberOfInstallment))
+               .divide(new BigDecimal(12), 2, RoundingMode.HALF_UP);
     }
 
-    public BigDecimal totalCreditCostCalculate(Application application) {
-        return creditCostCalculate(application).add(application.getAmountOfLoan());
+    public BigDecimal totalCreditCostCalculate(BigDecimal amountOfLoan, int numberOfInstallment) {
+        return creditCostCalculate(amountOfLoan, numberOfInstallment).add(amountOfLoan);
     }
 
-    public BigDecimal paymentPerMonthCalculate(Application application) {
-        return totalCreditCostCalculate(application)
-                .divide(BigDecimal.valueOf(application.getNumberOfInstallment()), 2, RoundingMode.HALF_UP);
+    public BigDecimal paymentPerMonthCalculate(BigDecimal amountOfLoan, int numberOfInstallment) {
+        return totalCreditCostCalculate(amountOfLoan, numberOfInstallment)
+                .divide(BigDecimal.valueOf(numberOfInstallment), 2, RoundingMode.HALF_UP);
     }
 }

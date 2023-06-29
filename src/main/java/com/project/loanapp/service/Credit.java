@@ -14,24 +14,13 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class Credit {
-
-
-    public boolean creditProcess(User user, Application application)  {
-        if (!user.isBlocked() && user.isAuthorized()) {
-            user.setAccountBalance(application.getAmountOfLoan());
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     private Calculation calculation;
 
-    public List<Installment> generateSchedule(Application application) {
+    public List<Installment> generateSchedule(BigDecimal amountOfLoan, int numberOfInstallment) {
 
         List<Installment> installments = new ArrayList<>();
-        for(int i = 0; i < application.getNumberOfInstallment(); i++) {
-            BigDecimal monthly = calculation.paymentPerMonthCalculate(application);
+        for(int i = 0; i < numberOfInstallment; i++) {
+            BigDecimal monthly = calculation.paymentPerMonthCalculate(amountOfLoan, numberOfInstallment);
 
             Installment installment = new Installment.InstallmentBuilder()
                     .amount(monthly)

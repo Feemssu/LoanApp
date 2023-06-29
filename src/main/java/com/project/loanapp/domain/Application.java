@@ -89,8 +89,10 @@ public class Application {
         private BigDecimal paymentPerMonth;
         private BigDecimal totalLoanRepayment;
         private List<Installment> installments;
+        private Calculation calculation;
         private Credit credit;
-        private final Calculation calculation;
+
+
 
         public ApplicationBuilder amountOfLoan(BigDecimal amountOfLoan) {
             this.amountOfLoan = amountOfLoan;
@@ -102,67 +104,42 @@ public class Application {
             return this;
         }
 
-        public ApplicationBuilder creditCost(BigDecimal creditCost) {
-            this.creditCost = creditCost;
-            return this;
-        }
 
-        public ApplicationBuilder paymentPerMonth(BigDecimal paymentPerMonth) {
-            this.paymentPerMonth = paymentPerMonth;
-            return this;
-        }
-
-        public ApplicationBuilder totalLoanRepayment(BigDecimal totalLoanRepayment) {
-            this.totalLoanRepayment = totalLoanRepayment;
-            return this;
-        }
-
-        public ApplicationBuilder installments(List<Installment> installments) {
-            this.installments = installments;
-            return this;
-        }
-
-
-
-        public ApplicationBuilder(Calculation calculation, Credit credit){
+        public ApplicationBuilder calculation(Calculation calculation) {
             this.calculation = calculation;
+            return this;
+        }
+
+        public ApplicationBuilder credit(Credit credit) {
             this.credit = credit;
-        }
-
-        public ApplicationBuilder generator(){
-            installments = credit.generateSchedule(buildApplication());
             return this;
         }
+        public Application build() {
+            calculateCreditCost();
+            calculateTotalCreditCost();
+            calculatePaymentPerMonth();
+            generateInstallments();
 
-        public ApplicationBuilder calculateCreditCost(){
-            creditCost = calculation.creditCostCalculate(buildApplication());
-            return this;
-        }
-
-        public ApplicationBuilder calculateTotalCreditCost() {
-            totalLoanRepayment = calculation.totalCreditCostCalculate(buildApplication());
-            return this;
-        }
-
-        public ApplicationBuilder calculatePaymentPerMonth() {
-            paymentPerMonth = calculation.paymentPerMonthCalculate(buildApplication());
-            return this;
-        }
-
-        private Application buildApplication() {
             return new Application(amountOfLoan, numberOfInstallment, creditCost,
                     paymentPerMonth, totalLoanRepayment, installments);
         }
 
+        private void calculateCreditCost() {
+            creditCost = calculation.creditCostCalculate(amountOfLoan, numberOfInstallment);
+        }
 
-        public Application build() {
-            Application application = buildApplication();
+        private void calculateTotalCreditCost() {
+            totalLoanRepayment = calculation.totalCreditCostCalculate(amountOfLoan, numberOfInstallment);
+        }
 
-            if(credit != null) {
-                List<Installment> generatedInstallments = credit.generateSchedule(application);
-                application.setInstallments(generatedInstallments);
+        private void calculatePaymentPerMonth() {
+            paymentPerMonth = calculation.paymentPerMonthCalculate(amountOfLoan, numberOfInstallment);
+        }
+
+        private void generateInstallments() {
+            if (credit != null) {
+                installments = credit.generateSchedule(totalLoanRepayment, numberOfInstallment);
             }
-            return application;
         }
     }
 

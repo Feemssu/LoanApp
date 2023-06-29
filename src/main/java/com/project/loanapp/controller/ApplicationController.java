@@ -1,10 +1,14 @@
 package com.project.loanapp.controller;
 
 import com.project.loanapp.domain.Application;
+import com.project.loanapp.domain.Installment;
+import com.project.loanapp.domain.User;
 import com.project.loanapp.dto.ApplicationDto;
 import com.project.loanapp.exception.ApplicationNotFoundException;
+import com.project.loanapp.exception.UserNotFoundException;
 import com.project.loanapp.mapper.ApplicationMapper;
 import com.project.loanapp.service.ApplicationService;
+import com.project.loanapp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +23,8 @@ public class ApplicationController {
 
     private final ApplicationService applicationService;
     private final ApplicationMapper applicationMapper;
-    @GetMapping(value = "allaplications")
+    private final UserService userService;
+    @GetMapping(value = "allapplications")
     public ResponseEntity<List<ApplicationDto>> getAllApplications() {
         List<Application> applications = applicationService.getAllApplications();
         return ResponseEntity.ok(applicationMapper.mapToApplicationDtoList(applications));
@@ -30,10 +35,19 @@ public class ApplicationController {
         return ResponseEntity.ok(applicationMapper.mapToApplicationDto(applicationService.getById(applicationId)));
     }
 
-    @PostMapping(value = "createapplication")
-    public ResponseEntity<Void> createApplication(@RequestBody ApplicationDto applicationDto) {
+    @PostMapping(value = "create")
+    public ResponseEntity<Void> createApplication(@RequestBody ApplicationDto applicationDto, @RequestParam Long userId) throws UserNotFoundException {
+        User user = userService.getUserById(userId);
         Application application = applicationMapper.mapToApplication(applicationDto);
+        user.setAccountBalance(applicationDto.getAmountOfLoan());
+        application.setUser(user);
         applicationService.saveApplication(application);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping(value = "delete/{applicationId}")
+    public ResponseEntity<Void> deleteApplication(@PathVariable long applicationId) {
+        applicationService.deleteApplication(applicationId);
         return ResponseEntity.ok().build();
     }
 }

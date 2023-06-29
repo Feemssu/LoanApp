@@ -1,7 +1,9 @@
 package com.project.loanapp.mapper;
 
 import com.project.loanapp.domain.Application;
+import com.project.loanapp.domain.Installment;
 import com.project.loanapp.dto.ApplicationDto;
+import com.project.loanapp.dto.InstallmentDto;
 import com.project.loanapp.service.Calculation;
 import com.project.loanapp.service.Credit;
 import lombok.RequiredArgsConstructor;
@@ -17,28 +19,25 @@ public class ApplicationMapper {
     private final Calculation calculation;
 
     private final Credit credit;
+    private final InstallmentMapper installmentMapper;
     public Application mapToApplication(final ApplicationDto applicationDto) {
-        return new Application.ApplicationBuilder(calculation, credit)
+        Application application = new Application.ApplicationBuilder()
                 .amountOfLoan(applicationDto.getAmountOfLoan())
                 .numberOfInstallment(applicationDto.getNumberOfInstallment())
-                .creditCost(applicationDto.getCreditCost())
-                .paymentPerMonth(applicationDto.getPaymentPerMonth())
-                .totalLoanRepayment(applicationDto.getTotalLoanRepayment())
-                .installments(applicationDto.getInstallments())
+                .calculation(calculation)
+                .credit(credit)
                 .build();
+        return application;
     }
 
     public ApplicationDto mapToApplicationDto(final Application application) {
-        return new ApplicationDto(
+        ApplicationDto applicationDto = new ApplicationDto (
                 application.getApplicationId(),
                 application.getAmountOfLoan(),
-                application.getInterest(),
                 application.getNumberOfInstallment(),
-                application.getCreditCost(),
-                application.getPaymentPerMonth(),
-                application.getTotalLoanRepayment(),
-                application.getInstallments()
+                installmentMapper.mapToInstallmentDtoList(application.getInstallments())
         );
+        return applicationDto;
     }
 
     public List<ApplicationDto> mapToApplicationDtoList(final List<Application> applicationList) {
