@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -99,5 +100,24 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping(value = "withdraw/{userId}")
+    public ResponseEntity<Void> withdrawMoney(@PathVariable Long userId, @RequestParam BigDecimal money) throws UserNotFoundException {
+        User user = userService.getUserById(userId);
+        if(user.getAccountBalance().compareTo(money)>0) {
+            user.setAccountBalance(user.getAccountBalance().subtract(money));
+            userService.saveUser(user);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+    }
+
+    @PostMapping(value = "deposit/{userId}")
+    public ResponseEntity<Void> depositMoney(@PathVariable Long userId, @RequestParam BigDecimal money) throws UserNotFoundException {
+        User user = userService.getUserById(userId);
+        user.setAccountBalance(user.getAccountBalance().add(money));
+        userService.saveUser(user);
+        return ResponseEntity.ok().build();
+    }
 
 }
