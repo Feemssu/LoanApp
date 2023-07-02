@@ -46,19 +46,7 @@ public class Userdata {
     @Column(name = "ADDRESS")
     private String address;
 
-    public Userdata(String firstname, String secondname, String lastname, String pesel, String phoneNumber, LocalDate dateOfBirth, String address, User user) {
-        this.firstname = firstname;
-        this.secondname = secondname;
-        this.lastname = lastname;
-        this.pesel = pesel;
-        this.phoneNumber = phoneNumber;
-        this.dateOfBirth = dateOfBirth;
-        this.address = address;
-        this.user = user;
-    }
-
-    public Userdata(Long userDataId, String firstname, String secondname, String lastname, String pesel, String phoneNumber, LocalDate dateOfBirth, String address, User user) {
-        this.userDataId = userDataId;
+    private Userdata(String firstname, String secondname, String lastname, String pesel, String phoneNumber, LocalDate dateOfBirth, String address, User user) {
         this.firstname = firstname;
         this.secondname = secondname;
         this.lastname = lastname;
@@ -73,17 +61,60 @@ public class Userdata {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @Override
-    public String toString() {
-        return "Userdata{" +
-                "userDataId=" + userDataId +
-                ", firstname='" + firstname + '\'' +
-                ", secondname='" + secondname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", pesel=" + pesel +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", address='" + address + '\'' +
-                '}';
+    public static class UserdataBuilder {
+
+        private String firstname;
+        private String secondname;
+        private String lastname;
+        private String pesel;
+        private String phoneNumber;
+        private LocalDate dateOfBirth;
+        private String address;
+        private User user;
+
+        public UserdataBuilder firstname(String firstname) {
+            this.firstname = firstname;
+            return this;
+        }
+
+        public UserdataBuilder secondname(String secondname) {
+            this.secondname = secondname;
+            return this;
+        }
+
+        public UserdataBuilder lastname(String lastname) {
+            this.lastname = lastname;
+            return this;
+        }
+
+        public UserdataBuilder pesel(String pesel) {
+            this.pesel = pesel;
+            return this;
+        }
+
+        public UserdataBuilder phoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public UserdataBuilder dateOfBirth(LocalDate dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
+            return this;
+        }
+
+        public UserdataBuilder address(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public UserdataBuilder user(User user) {
+            this.user = user;
+            return this;
+        }
+
+        public Userdata build() {
+            return new Userdata(firstname, secondname, lastname, pesel, phoneNumber, dateOfBirth, address, user);
+        }
     }
+
 }

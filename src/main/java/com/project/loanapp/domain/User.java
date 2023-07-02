@@ -51,28 +51,11 @@ public class User {
     @Column(name = "ACCOUNT_BALANCE")
     private BigDecimal accountBalance = new BigDecimal(0);
 
-    public User(String login, String password, String email) {
-        this.login = login;
-        this.password = password;
-        this.email = email;
-    }
 
-    public User(Long userId, String login, String password, String email) {
-        this.userId = userId;
+    private User(String login, String password, String email) {
         this.login = login;
         this.password = password;
         this.email = email;
-    }
-
-    public User(Long userId, String login, String password, String email, boolean isBlocked, boolean isAuthorized, boolean isLoggedIn, BigDecimal accountBalance) {
-        this.userId = userId;
-        this.login = login;
-        this.password = password;
-        this.email = email;
-        this.isBlocked = isBlocked;
-        this.isAuthorized = isAuthorized;
-        this.isLoggedIn = isLoggedIn;
-        this.accountBalance = accountBalance;
     }
 
     @JsonIgnore
@@ -93,19 +76,27 @@ public class User {
 
     )
     private List<Application> application = new ArrayList<>();
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", isBlocked=" + isBlocked +
-                ", isAuthorized=" + isAuthorized +
-                ", isLoggedIn=" + isLoggedIn +
-                ", userdata=" + userdata +
-                ", accountBalance=" + accountBalance +
-              //  ", application=" + application +
-                '}';
+
+    public static class UserBuilder {
+        private String login;
+        private String password;
+        private String email;
+        public UserBuilder login(String login) {
+            this.login = login;
+            return this;
+        }
+
+        public UserBuilder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public UserBuilder email(String email) {
+            this.email = email;
+            return this;
+        }
+        public User build() {
+            return new User(login, password, email);
+        }
     }
 }

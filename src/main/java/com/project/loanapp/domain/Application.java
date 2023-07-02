@@ -45,23 +45,6 @@ public class Application {
     private BigDecimal totalLoanRepayment;
 
 
-    public Application(BigDecimal amountOfLoan, int numberOfInstallment) {
-        this.amountOfLoan = amountOfLoan;
-        this.numberOfInstallment = numberOfInstallment;
-    }
-
-    private Application(Long applicationId, BigDecimal amountOfLoan, int numberOfInstallment,
-                       BigDecimal creditCost, BigDecimal paymentPerMonth, BigDecimal totalLoanRepayment,
-                       List<Installment> installments) {
-        this.applicationId = applicationId;
-        this.amountOfLoan = amountOfLoan;
-        this.numberOfInstallment = numberOfInstallment;
-        this.creditCost = creditCost;
-        this.paymentPerMonth = paymentPerMonth;
-        this.totalLoanRepayment = totalLoanRepayment;
-        this.installments = installments;
-    }
-
     private Application(BigDecimal amountOfLoan, int numberOfInstallment, BigDecimal creditCost,
                        BigDecimal paymentPerMonth, BigDecimal totalLoanRepayment,
                        List<Installment> installments) {
@@ -140,20 +123,5 @@ public class Application {
                 installments = credit.generateSchedule(totalLoanRepayment, numberOfInstallment);
             }
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Application{" +
-                "applicationId=" + applicationId +
-                ", amountOfLoan=" + amountOfLoan +
-                ", interest=" + interest +
-                ", numberOfInstallment=" + numberOfInstallment +
-                ", creditCost=" + creditCost +
-                ", paymentPerMonth=" + paymentPerMonth +
-                ", totalLoanRepayment=" + totalLoanRepayment +
-                ", user=" + user +
-                ", installments=" + installments +
-                '}';
     }
 }

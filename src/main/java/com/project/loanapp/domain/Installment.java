@@ -33,14 +33,7 @@ public class Installment {
     private Boolean isPaid;
 
 
-    private Installment(Long installmentId, BigDecimal amount, LocalDate dueDate, Boolean isPaid) {
-        this.installmentId = installmentId;
-        this.amount = amount;
-        this.dueDate = dueDate;
-        this.isPaid = isPaid;
-    }
-
-    public Installment(BigDecimal amount, LocalDate dueDate, Boolean isPaid) {
+    private Installment(BigDecimal amount, LocalDate dueDate, Boolean isPaid) {
         this.amount = amount;
         this.dueDate = dueDate;
         this.isPaid = isPaid;
@@ -80,5 +73,4 @@ public class Installment {
             return new Installment(amount, dueDate, isPaid);
         }
     }
-
 }

@@ -2,7 +2,6 @@ package com.project.loanapp.mapper;
 
 import com.project.loanapp.domain.Userdata;
 import com.project.loanapp.dto.UserdataDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,17 +11,15 @@ import java.util.stream.Collectors;
 public class UserdataMapper {
 
     public Userdata mapToUserdata(final UserdataDto userDataDto) {
-        return new Userdata(
-                userDataDto.getUserDataId(),
-                userDataDto.getFirstname(),
-                userDataDto.getSecondname(),
-                userDataDto.getLastname(),
-                userDataDto.getPesel(),
-                userDataDto.getPhoneNumber(),
-                userDataDto.getDateOfBirth(),
-                userDataDto.getAddress(),
-                userDataDto.getUser()
-        );
+        return new Userdata.UserdataBuilder()
+                .firstname(userDataDto.getFirstname())
+                .secondname(userDataDto.getSecondname())
+                .lastname(userDataDto.getLastname())
+                .pesel(userDataDto.getPesel())
+                .phoneNumber(userDataDto.getPhoneNumber())
+                .dateOfBirth(userDataDto.getDateOfBirth())
+                .address(userDataDto.getAddress())
+                .build();
     }
 
     public UserdataDto mapToUserdataDto(final Userdata userData) {
