@@ -1,7 +1,5 @@
 package com.project.loanapp.service;
 
-import com.project.loanapp.domain.Application;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

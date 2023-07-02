@@ -5,8 +5,6 @@ import com.project.loanapp.domain.Mail;
 import com.project.loanapp.repository.InstallmentRepository;
 import com.project.loanapp.service.SimpleEmailService;
 import lombok.AllArgsConstructor;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,6 @@
 package com.project.loanapp.controller;
 
 import com.project.loanapp.domain.Application;
-import com.project.loanapp.domain.Installment;
 import com.project.loanapp.domain.User;
 import com.project.loanapp.dto.ApplicationDto;
 import com.project.loanapp.exception.ApplicationNotFoundException;
@@ -13,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

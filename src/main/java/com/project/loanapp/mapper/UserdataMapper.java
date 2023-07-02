@@ -9,10 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@RequiredArgsConstructor
 public class UserdataMapper {
 
-    private final UserMapper userMapper;
     public Userdata mapToUserdata(final UserdataDto userDataDto) {
         return new Userdata(
                 userDataDto.getUserDataId(),

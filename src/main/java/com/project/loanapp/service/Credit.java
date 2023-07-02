@@ -1,8 +1,6 @@
 package com.project.loanapp.service;
 
-import com.project.loanapp.domain.Application;
 import com.project.loanapp.domain.Installment;
-import com.project.loanapp.domain.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

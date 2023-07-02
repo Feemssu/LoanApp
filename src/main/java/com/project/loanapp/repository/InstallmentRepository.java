@@ -1,6 +1,5 @@
 package com.project.loanapp.repository;
 
-import com.project.loanapp.domain.Application;
 import com.project.loanapp.domain.Installment;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Query;
