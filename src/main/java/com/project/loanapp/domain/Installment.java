@@ -31,10 +31,6 @@ public class Installment {
     @Column(name = "IS_PAID")
     private Boolean isPaid;
 
-    public void markAsPaid() {
-        this.isPaid = true;
-    }
-
 
     private Installment(Long installmentId, BigDecimal amount, LocalDate dueDate, Boolean isPaid) {
         this.installmentId = installmentId;
@@ -47,6 +43,10 @@ public class Installment {
         this.amount = amount;
         this.dueDate = dueDate;
         this.isPaid = isPaid;
+    }
+
+    public Installment(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
     @ManyToOne
