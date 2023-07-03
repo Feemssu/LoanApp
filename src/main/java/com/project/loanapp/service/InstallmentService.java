@@ -18,7 +18,7 @@ public class InstallmentService {
         return installmentRepository.findAll();
     }
 
-    public Installment getInstallmentById(Long installmentId) throws InstallmentNotFoundException {
+    public Installment getInstallmentById(final Long installmentId) throws InstallmentNotFoundException {
         return installmentRepository.findById(installmentId).orElseThrow(InstallmentNotFoundException::new);
     }
 
@@ -26,4 +26,7 @@ public class InstallmentService {
         return installmentRepository.save(installment);
     }
 
+    public void deleteInstallmentById(final Long installmentId) {
+        installmentRepository.deleteById(installmentId);
+    }
 }

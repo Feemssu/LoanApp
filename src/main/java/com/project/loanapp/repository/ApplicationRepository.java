@@ -21,4 +21,7 @@ public interface ApplicationRepository extends CrudRepository<Application, Long>
     @Override
     Optional<Application> findById(Long applicationId);
 
+    @Override
+    void deleteById(Long applicationId);
+
 }

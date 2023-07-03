@@ -39,10 +39,6 @@ public class Installment {
         this.isPaid = isPaid;
     }
 
-    public Installment(LocalDate dueDate) {
-        this.dueDate = dueDate;
-    }
-
     @ManyToOne
     @JoinColumn(name = "application_id")
     private Application application;

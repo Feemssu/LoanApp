@@ -25,4 +25,7 @@ public interface InstallmentRepository extends CrudRepository<Installment, Long>
 
     @Query("SELECT i FROM Installment i WHERE i.dueDate BETWEEN CURRENT_DATE AND :weekFromNow AND i.isPaid = false")
     List<Installment> findInstallmentDueWithinAWeek(LocalDate weekFromNow);
+
+    @Override
+    void deleteById(Long installmentId);
 }

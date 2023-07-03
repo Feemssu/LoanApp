@@ -19,6 +19,7 @@ public class UserdataMapper {
                 .phoneNumber(userDataDto.getPhoneNumber())
                 .dateOfBirth(userDataDto.getDateOfBirth())
                 .address(userDataDto.getAddress())
+                .user(userDataDto.getUser())
                 .build();
     }
 

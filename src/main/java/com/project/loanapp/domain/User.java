@@ -63,11 +63,6 @@ public class User {
     private Userdata userdata;
 
 
-    public void setUserdata(Userdata userdata) {
-        this.userdata = userdata;
-        this.isAuthorized = true;
-    }
-
     @OneToMany(
             targetEntity = Application.class,
             cascade = CascadeType.ALL,
