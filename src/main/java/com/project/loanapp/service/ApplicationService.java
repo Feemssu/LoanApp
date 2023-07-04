@@ -5,7 +5,6 @@ import com.project.loanapp.domain.Installment;
 import com.project.loanapp.exception.ApplicationNotFoundException;
 import com.project.loanapp.repository.ApplicationRepository;
 import com.project.loanapp.repository.InstallmentRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

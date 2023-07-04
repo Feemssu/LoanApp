@@ -2,7 +2,6 @@ package com.project.loanapp.mapper;
 
 import com.project.loanapp.domain.Application;
 import com.project.loanapp.dto.ApplicationDto;
-import com.project.loanapp.dto.InstallmentDto;
 import com.project.loanapp.service.Calculation;
 import com.project.loanapp.service.Credit;
 import org.junit.jupiter.api.Test;
